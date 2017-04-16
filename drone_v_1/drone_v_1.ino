@@ -2,27 +2,27 @@ void on(void);
 void off(void);
 void inputs(int);
 int gnd = 13;
-int mot = 10;
-int b =1;
-int in1=  9;
+int mot2 = 10;
+int mot1=  9;
 void stopm(void);
 
 void setup(void)
 {
  Serial.begin (9600);
- pinMode(in1,OUTPUT);  
+ pinMode(mot1,OUTPUT);  
 pinMode(gnd,OUTPUT);
  digitalWrite(gnd,LOW); 
-pinMode(mot,OUTPUT);
+pinMode(mot2,OUTPUT);
 
 }
 
-void loop(void) {
+void loop(void)
+{
 
 
  char a=Serial.read(); 
-while(a!='2')
-{
+  while(a!='2')
+  {
   
  char a=Serial.read(); 
  delay(110);
@@ -30,51 +30,35 @@ while(a!='2')
 
  Serial.println(a);
 
- if(a=='0')
- {
-  off();
-  
- }
- else if(a=='1')
- {
-  on();
- }
-  
- else if(a=='2')
- {
-  stopm();
- }
-
-else 
-{
-  
-//  stopm();
-
-  off();
+ 
+       if(a=='1')
+        {
+           on();
+        }
+      else 
+      {
+        off();
+       }
   }
-}
 }
 void on(void) 
 {
-   digitalWrite(in1, HIGH);
-    analogWrite(in1,160);/*
-     digitalWrite(mot, HIGH);
-    analogWrite(mot,185);
- // delay (1200);*/
-
+   digitalWrite(mot1, HIGH);
+    analogWrite(mot1,160);
+    delay(43);
+     digitalWrite(mot2, HIGH);
+    analogWrite(mot2,160);
+ // delay (110);
   
 }
 void off(void) 
 {
-   digitalWrite(in1, LOW);
-       analogWrite(in1,50);
-  //delay (1200);
-}
-void stopm(void)
-{
- digitalWrite(in1, LOW);
+    digitalWrite(mot1, HIGH);
+    analogWrite(mot1,50);
+    
+     digitalWrite(mot2, HIGH);
+    analogWrite(mot2,50);
+  delay (110);
 
-if (in1 == HIGH) {
-  digitalWrite(mot,HIGH);
-}
+  //delay (1200);
 }
